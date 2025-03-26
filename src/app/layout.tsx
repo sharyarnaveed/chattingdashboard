@@ -6,6 +6,11 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+// src/app/layout.tsx
+import { syncDatabase } from '@/lib/db';
+
+// Initialize database when app loads
+syncDatabase().catch(console.error);
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
