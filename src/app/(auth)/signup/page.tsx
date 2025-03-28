@@ -14,9 +14,9 @@ const page = () => {
 
 const [TheSuccess,SetSuccess]=useState<boolean>(false)
 const [successMsg,SetMsg]=useState<string>("")
-const {register,handleSubmit,resetField}=useForm<signup>()
 const [errorState,SeterrorState]=useState<boolean>()
 const [error,Seterror]=useState<string>("")
+const {register,handleSubmit,resetField}=useForm<signup>()
 const onsignup:SubmitHandler<signup>=async(data)=>
 {
     try {

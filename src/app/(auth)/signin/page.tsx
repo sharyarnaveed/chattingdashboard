@@ -1,5 +1,7 @@
 "use client"
-
+import axios from "axios"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import {useForm,SubmitHandler} from "react-hook-form"
 
 type signin={
@@ -9,12 +11,22 @@ type signin={
 
 const page = () => {
 
+  const router=useRouter()
 const {register,handleSubmit}=useForm<signin>()
+
+const [TheSuccess,SetSuccess]=useState<boolean>(false)
+const [successMsg,SetMsg]=useState<string>("")
+const [errorState,SeterrorState]=useState<boolean>()
+const [error,Seterror]=useState<string>("")
 
 const onsignin:SubmitHandler<signin>=async(data)=>
 {
 try {
-    
+    const responce=await axios.post("/api/signin",data)
+    console.log(responce.data);
+    if (responce.data.success) {
+      router.push("/dashboard")
+    }
 } catch (error) {
     console.log("error in signing in",error);
     
@@ -66,7 +78,7 @@ try {
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
               >
-                Sign up
+                Sign In
               </button>
             </div>
           </form>
